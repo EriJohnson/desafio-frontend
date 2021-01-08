@@ -32,7 +32,7 @@ const Calendario = () => {
 
   return (
     <Paper>
-      <Scheduler data={events} height={840}>
+      <Scheduler data={events} height='auto' locale='pt-BR'>
         <ViewState defaultCurrentDate={'2020-02-01'} />
         <WeekView startDayHour={8} endDayHour={18} />
         <Toolbar />
