@@ -10,7 +10,8 @@ import {
   AppointmentTooltip,
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-import convertMinutesToSchedule from '../../utils/convertMinutesToSchedule'
+import formatEventsToTheLibFormat from '../../utils/formatEventsToTheLibFormat'
+
 import api from '../../services/api'
 
 const Calendario = () => {
@@ -20,25 +21,7 @@ const Calendario = () => {
     async function getEvents() {
       try {
         const { data } = await api.get('/events')
-        const eventsConverted = data.map(e => ({
-          title: e.title,
-          startDate: new Date(
-            e.date.substring(0, 4),
-            e.date.substring(5, 7),
-            e.date.substring(8, 10),
-            convertMinutesToSchedule(e.start)[0],
-            convertMinutesToSchedule(e.start)[1]
-          ),
-          endDate: new Date(
-            e.date.substring(0, 4),
-            e.date.substring(5, 7),
-            e.date.substring(8, 10),
-            convertMinutesToSchedule(e.finish)[0],
-            convertMinutesToSchedule(e.finish)[1]
-          ),
-          description: e.description,
-        }))
-
+        const eventsConverted = data.map(e => formatEventsToTheLibFormat(e))
         setEvents(eventsConverted)
       } catch (error) {
         alert('Ocorreu um erro ao buscar os eventos')
@@ -49,13 +32,13 @@ const Calendario = () => {
 
   return (
     <Paper>
-      <Scheduler data={events} height={800}>
-        <ViewState defaultCurrentDate={'2020-01-01'} />
-        <WeekView startDayHour={6} endDayHour={24} />
+      <Scheduler data={events} height={840}>
+        <ViewState defaultCurrentDate={'2020-02-01'} />
+        <WeekView startDayHour={8} endDayHour={18} />
         <Toolbar />
         <DateNavigator />
         <Appointments />
-        <AppointmentTooltip contentComponent />
+        <AppointmentTooltip />
       </Scheduler>
     </Paper>
   )
