@@ -1,47 +1,37 @@
 # Desafio-Frontend
 
+## Como rodar o projeto
 
-## Bem-vindo
+### Backend
 
-A TASDP é uma Startup com foco em desenvolvimento de sistemas web por demanda para áreas de saúde e industrias.
-
-## Como participar
-
-* Crie um novo fork e branch com seu nome-sobrenome e faça um pull request quando estiver pronto. Iremos fazer code review.
-
-## O desafio
-
-Você deverá criar uma Agenda de Eventos e apresentar os dados contidos no arquivo events.json. Obs: você pode ser basear no Google Agenda (Mobile e Desktop)
-
-Requisitos:
-
-1. A agenda deverá mostrar uma visão semanal dos eventos e ao carregar deverá ser mostrada a semana atual
-2. Deve ser possível avançar e retroceder datas
-3. Eventos que ocorrem em um mesmo período devem ser apresentados de forma clara
-4. Ao clicar em um evento deverá ser mostrado suas informações
-
-Obs 1: Os campos start e finish do JSON representam minutos após a meia-noite, ou seja, caso start tenha um valor de 480, significa que o evento inicia as 8h da manhã.
-
-Obs 2: levaremos em conta o layout na versão Mobile e Desktop
-
-## Serviço Rest
-
-Criar o backend não é o foco deste teste, portanto está sendo disponibilizado um serviço Rest que deve ser utilizado para recuperar a lista de produtos do projeto.
-
-Para rodar o serviço, é necessário instalar o json-server:
+Para rodar o projeto, é necessário primeiro instalar o json-server:
 
 `npm install -g json-server`
 
-Após isso, rodar o comando: `json-server --watch rest-api/events.json`
+Após isso, vá até a pasta "rest-api" e rode o comando: 
+
+`json-server --watch events.json`
 
 Isso irá disponibilizar uma api REST rodando no endereço http://localhost:3000/events.
 
-Um produto especifico pode ser acessado através da url http://localhost:3000/events/{id};
+OBS.: É importante rodar primeiro o backend, pois irá rodar na porta 3000, ou seja, a mesma porta do frontend, mas rodando o frontend por segundo, o React irá 
+reconhece que já tem algo rodando na porta 3000 e irá sugerir de rodar enm uma outra porta automaticamente.
 
-## Dicas
+### Frontend
 
-* Tudo bem, até pode usar jquery. Se você não quiser usar (bônus), uma sugestão: Axios para a comunicação com a API.
-* HTML o mais semântico possível.
-* Branches com readme e instruções de implantação serão bem vindos.
-* Pré-processadores CSS como Stylus ou LESS também.
-* Que tal utilizar BEM nos identificadores css? http://getbem.com/naming/ 
+Vá até a pasta "agenda" e rode o seguinte comando para instalar todas dependências do projeto:
+
+`npm install`
+
+Após ter instalado todos dependências, basta rodar o seguinte comando para iniciar o projeto:
+
+`npm start`
+
+O projeto provavelmente irá rodar na porta 3001. Ao iniciar, será exibido a semana atual. Para visualizar os eventos cadastrados vá até o mês de fevereiro de 2020.
+
+OBS.: Os eventos aparecem em fevereiro porque a API de datas do JavaScript começa a contar os meses do zero e os eventos estão cadastrados com o mês 01, portanto
+os eventos acabaram sendo cadastrados em fevereiro de 2020.
+
+## Considerações finais
+
+Praticamente não foi utilizado CSS pois foi utilizado a biblioteca [React Scheduler](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/appointments/#react-scheduler---appointments) a qual já possui sua estilização própria baseada em [Material-UI](https://material-ui.com/pt/).
